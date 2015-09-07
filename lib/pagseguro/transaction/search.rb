@@ -15,11 +15,11 @@ module PagSeguro
     attr_reader :page
 
 
-    def initialize(path, options, page = 0, config)
+    def initialize(path, options, page = 0, env)
       @path = path
       @options = options
       @page = page
-      @env = config.enviroment
+      @env = env
     end
 
     # Return the list of transactions.
