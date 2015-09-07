@@ -6,7 +6,10 @@ module PagSeguro
       def_delegators :response, :success?
       attr_reader :response
 
+      attr_accessor :env
+
       def initialize(response, env)
+        self.env = env
         @response = response
       end
 
