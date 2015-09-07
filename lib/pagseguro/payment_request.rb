@@ -95,7 +95,7 @@ module PagSeguro
         token: token,
         enviroment: enviroment
       })
-      Response.new Request.post("checkout", api_version, params, nil, env), enviroment
+      Response.new Request.post("checkout", api_version, params,{} , env), enviroment
     end
 
     private
