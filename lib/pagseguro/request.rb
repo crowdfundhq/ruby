@@ -14,8 +14,8 @@ module PagSeguro
     # # +data+: the data that will be sent as query string. Must be a Hash.
     # # +headers+: any additional header that will be sent through the request.
     #
-    def get(path, api_version, data = {}, headers = {})
-      execute :get, path, api_version, data, headers
+    def get(path, api_version, data = {}, headers = {}, env)
+      execute :get, path, api_version, data, headers, env
     end
 
     # Perform a POST request.
@@ -25,16 +25,16 @@ module PagSeguro
     # # +data+: the data that will be sent as body data. Must be a Hash.
     # # +headers+: any additional header that will be sent through the request.
     #
-    def post(path, api_version, data = {}, headers = {})
-      execute :post, path, api_version, data, headers
+    def post(path, api_version, data = {}, headers = {}, env)
+      execute :post, path, api_version, data, headers, env
     end
 
     # Perform the specified HTTP request. It will include the API credentials,
     # api_version, encoding and additional headers.
-    def execute(request_method, path, api_version, data, headers) # :nodoc:
+    def execute(request_method, path, api_version, data, headers, env) # :nodoc:
       request.public_send(
         request_method,
-        PagSeguro.api_url("#{api_version}/#{path}", data[:enviroment]),
+        PagSeguro.api_url("#{api_version}/#{path}", env),
         extended_data(data),
         extended_headers(request_method, headers)
       )

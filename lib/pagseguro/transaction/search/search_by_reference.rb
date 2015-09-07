@@ -5,7 +5,7 @@ module PagSeguro
       @response = Request.get(@path, api_version,
         {
           reference: options[:reference],
-        })
+        },nil, @env)
       @errors = Errors.new(@response)
     end
   end
