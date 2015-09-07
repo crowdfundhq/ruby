@@ -34,7 +34,7 @@ module PagSeguro
     def execute(request_method, path, api_version, data, headers) # :nodoc:
       request.public_send(
         request_method,
-        PagSeguro.api_url("#{api_version}/#{path}"),
+        PagSeguro.api_url("#{api_version}/#{path}", data[:enviroment]),
         extended_data(data),
         extended_headers(request_method, headers)
       )

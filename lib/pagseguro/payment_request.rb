@@ -54,8 +54,14 @@ module PagSeguro
     # The email that identifies the request. Defaults to PagSeguro.email
     attr_accessor :email
 
+    # The receiver_email that identifies the request. Defaults to PagSeguro.email
+    attr_accessor :receiver_email
+
     # The token that identifies the request. Defaults to PagSeguro.token
     attr_accessor :token
+
+    # The enviroment for the request
+    attr_accessor :enviroment
 
     # The extra parameters for payment request
     attr_accessor :extra_params
@@ -75,13 +81,21 @@ module PagSeguro
       @shipping = ensure_type(Shipping, shipping)
     end
 
+    def setup(config)
+      self.email = config.email
+      self.token = config.token
+      self.receiver_email = config.receiver_email
+      self.enviroment = config.enviroment
+    end
+
     # Calls the PagSeguro web service and register this request for payment.
     def register
       params = Serializer.new(self).to_params.merge({
         email: email,
-        token: token
+        token: token,
+        enviroment: enviroment
       })
-      Response.new Request.post("checkout", api_version, params)
+      Response.new Request.post("checkout", api_version, params), enviroment
     end
 
     private

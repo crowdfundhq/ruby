@@ -78,8 +78,8 @@ module PagSeguro
 
   # Return the root uri based on its type.
   # Current types are <tt>:api</tt> or <tt>:site</tt>
-  def self.root_uri(type)
-    root = uris.fetch(environment.to_sym) { raise InvalidEnvironmentError }
+  def self.root_uri(type,env)
+    root = uris.fetch(env.to_sym) { raise InvalidEnvironmentError }
     root[type.to_sym]
   end
 
@@ -100,12 +100,12 @@ module PagSeguro
   end
 
   # The API endpoint.
-  def self.api_url(path)
-    File.join(root_uri(:api), path)
+  def self.api_url(path,env)
+    File.join(root_uri(:api,env), path)
   end
 
   # The site url.
-  def self.site_url(path)
-    File.join(root_uri(:site), path)
+  def self.site_url(path,env)
+    File.join(root_uri(:site,env), path)
   end
 end

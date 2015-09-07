@@ -10,5 +10,8 @@ module PagSeguro
 
     # The API token associated with this account.
     attr_accessor :token
+
+    # The enviroment
+    attr_accessor :enviroment
   end
 end

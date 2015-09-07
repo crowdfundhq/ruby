@@ -9,7 +9,7 @@ module PagSeguro
       end
 
       def to_params
-        params[:receiverEmail] = PagSeguro.receiver_email
+        params[:receiverEmail] = payment_request.receiver_email
         params[:currency] = payment_request.currency
         params[:reference] = payment_request.reference
         params[:extraAmount] = to_amount(payment_request.extra_amount)

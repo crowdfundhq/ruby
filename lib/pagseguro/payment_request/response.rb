@@ -6,7 +6,7 @@ module PagSeguro
       def_delegators :response, :success?
       attr_reader :response
 
-      def initialize(response)
+      def initialize(response, env)
         @response = response
       end
 
@@ -15,7 +15,7 @@ module PagSeguro
       end
 
       def url
-        PagSeguro.site_url("#{api_version}/checkout/payment.html?code=#{code}") if code
+        PagSeguro.site_url("#{api_version}/checkout/payment.html?code=#{code}",env) if code
       end
 
       def code
